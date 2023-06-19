@@ -1,17 +1,24 @@
 require_relative 'person'
 
 class Student < Person
+  attr_accessor :name, :age, :parent_permission
+
+  attr_reader :classroom
+
   def initialize(age, classroom, name = 'unknown', parent_permission: true)
     super(age, name, parent_permission)
     @classroom = classroom
     @id = Random.rand(1..1000)
   end
 
+  def classroom=(classroom)
+    @classroom = classroom
+    classroom.students << self unless classroom.students.include?(self)
+  end
+
   def play_hookey
     '¯\(ツ)/¯'
   end
-
-  attr_accessor :classroom, :name, :age, :parent_permission
 
   def print_class
     @classroom
