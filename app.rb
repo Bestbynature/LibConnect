@@ -32,11 +32,19 @@ class App
     puts '-------List of people are as follows:---------'
     @people.each_with_index do |person, index|
       if person.is_a? Student
-        puts "[#{person.class}] - #{index}) - Name: #{person.name},
-        Age: #{person.age}, ID: #{person.id}, Parent Permission: #{person.parent_permission}"
+        name = person.name
+        age = person.age
+        id = person.id
+        par_perm = person.parent_permission
+        grp = person.class
+        puts "[#{grp}] - #{index}) - Name: #{name}, Age: #{age}, ID: #{id}, Parent Permission: #{par_perm}"
       elsif person.is_a? Teacher
-        puts "[#{person.class}] - #{index}) - Name: #{person.name}, Age: #{person.age},
-        ID: #{person.id}, Specialization: #{person.specialization}"
+        grp = person.class
+        name = person.name
+        age = person.age
+        id = person.id
+        spec = person.specialization
+        puts "[#{grp}] - #{index}) - Name: #{name}, Age: #{age}, ID: #{id}, Specialization: #{spec}"
       end
     end
   end

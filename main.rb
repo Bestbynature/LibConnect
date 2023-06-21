@@ -1,4 +1,5 @@
 require_relative 'app'
+require_relative 'printer'
 
 OPTIONS = {
   1 => 'List all books',
@@ -11,19 +12,12 @@ OPTIONS = {
   8 => 'Exit'
 }.freeze
 
-def print_options
-  puts '----------------------------------------------'
-  puts 'Welcome to the School Library App'
-  puts 'Please choose an option below:'
-  OPTIONS.each { |key, option| puts "#{key}. #{option}" }
-  puts '----------------------------------------------'
-end
-
 def main
   app = App.new
 
   loop do
-    print_options
+    printer = Printer.new
+    printer.print_options
     option = gets.chomp.to_i
 
     case option
