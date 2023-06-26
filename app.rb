@@ -51,109 +51,107 @@ class App
 
   # prompt user for person details based on the type
   def create_a_person
-    name = get_name
-    age = get_age
-    type = get_person_type
-  
+    name = retrieve_name
+    age = retrieve_age
+    type = retrieve_person_type
+
     case type
     when 1
-      parent_permission = get_parent_permission
+      parent_permission = retrieve_parent_permission
       person = Student.new(nil, age, name, parent_permission)
     when 2
-      specialization = get_specialization
+      specialization = retrieve_specialization
       person = Teacher.new(specialization, age, name)
     else
       puts 'Invalid person type.'
       return
     end
-  
+
     @people.push(person)
     puts '-------------------------------------'
     puts 'Person added successfully'
     puts '-------------------------------------'
   end
-  
-  def get_name
+
+  def retrieve_name
     puts 'Name of the person:'
     gets.chomp
   end
-  
-  def get_age
+
+  def retrieve_age
     puts 'Age of the person:'
     gets.chomp.to_i
   end
-  
-  def get_person_type
+
+  def retrieve_person_type
     puts 'Type of person: choose 1 for Student or 2 for Teacher'
     gets.chomp.to_i
   end
-  
-  def get_parent_permission
+
+  def retrieve_parent_permission
     puts 'Has parent permission? (Y/N)'
     gets.chomp.upcase == 'Y'
   end
-  
-  def get_specialization
+
+  def retrieve_specialization
     puts 'Specialization:'
     gets.chomp
   end
-  
 
   # prompt user for book details
   def create_a_book
-    title = get_title
-    author = get_author
+    title = retrieve_title
+    author = retrieve_author
     book = Book.new(title, author)
     @books.push(book)
     puts '-------------------------------------'
     puts 'Book added successfully'
     puts '-------------------------------------'
   end
-  
-  def get_title
+
+  def retrieve_title
     puts 'Title of the book:'
     gets.chomp
   end
-  
-  def get_author
+
+  def retrieve_author
     puts 'Author of the book:'
     gets.chomp
   end
-  
 
   # prompt user to select a person and a book from the list and create a rental
   def create_a_rental
     book = select_book
     person = select_person
-    date = get_date
-  
+    date = retrieve_date
+
     rental = Rental.new(date, book, person)
     @rentals.push(rental)
-  
+
     puts '-------------------------------------'
     puts 'Rental created successfully'
     puts '-------------------------------------'
   end
-  
+
   def select_book
     puts 'Select a book from the following list by number'
     list_all_books
     book_id = gets.chomp.to_i
     @books[book_id]
   end
-  
+
   def select_person
     puts 'Select a person from the following list by number'
     list_all_people
     person_id = gets.chomp.to_i
     @people[person_id]
   end
-  
-  def get_date
+
+  def retrieve_date
     puts 'Date: in this format => yyyy/mm/dd'
     gets.chomp
   end
-  
+
   # list all rentals with their date, book title and person name and index
   def list_all_rentals
     puts '----------------------------------------------'
@@ -166,9 +164,9 @@ class App
 
   # list all rentals for a given person.id not the index of the array
   def list_all_rentals_for_a_given_person_id
-    person_id = get_person_id
+    person_id = retrieve_person_id
     person = find_person_by_id(person_id)
-  
+
     if person
       puts '---------list of rentals are as follows:---------'
       display_rentals(person.rentals)
@@ -176,20 +174,19 @@ class App
       puts 'Person not found'
     end
   end
-  
-  def get_person_id
+
+  def retrieve_person_id
     puts 'Please enter the ID of the person'
     gets.chomp.to_i
   end
-  
+
   def find_person_by_id(person_id)
     @people.find { |person| person.id == person_id }
   end
-  
+
   def display_rentals(rentals)
     rentals.each_with_index do |rental, index|
       puts "#{index}) - Borrowed Date: #{rental.date}, Book borrowed: #{rental.book.title}"
     end
   end
-  
 end
