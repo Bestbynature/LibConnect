@@ -1,6 +1,7 @@
 require_relative 'app'
 require_relative 'printer'
 
+# The list of options to be displayed to let user choose one
 OPTIONS = {
   1 => 'List all books',
   2 => 'List all people',
@@ -22,11 +23,14 @@ def main
 
     case option
     when 1..7
+      # call the function selected from the list from app object
       app.send(OPTIONS[option].downcase.gsub(/\s+/, '_'))
     when 8
+      # display a message and exit the application
       puts 'Thank you for using this app. Goodbye!'
       break
     else
+      # display an invalid option message
       puts 'Invalid option. Please try again.'
     end
   end

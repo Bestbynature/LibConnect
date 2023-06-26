@@ -70,7 +70,7 @@ In order to run this project you need:
     <li>Node Package manager (npm) </li>
     <li>An editor such as Visual Studio Code</li>
   </ul>
-  
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Setup
@@ -83,7 +83,7 @@ Clone this repository to your desired folder:
     <li>Update your git identity by running "git config --global user.email "your_email@gmail.com""</li>
     <li>Update your name on git by running "git config --global user.name "your_name"</li>
   </ul>
-  
+
   <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Install
@@ -106,7 +106,7 @@ To run tests, run the following command:
 Run "rubocop --fix to fix linters"
 ```
 
-or 
+or
 
 ```sh
 
@@ -128,13 +128,18 @@ You can deploy this project using:
 
 <!-- AUTHORS -->
 
-## 👥 Author <a name="authors"></a>
- 
+## 👥 Authors <a name="authors"></a>
+
 👤 **Author: Damilare**
 
 - GitHub: [@githubhandle](https://github.com/Bestbynature)
 - Twitter: [@twitterhandle](https://twitter.com/Dammybest)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/damilareismailabestbynature/)
+
+👤 **Sasan Moshirabadi**
+
+- GitHub: [@dev89s](https://github.com/dev89s)
+- LinkedIn: [LinkedIn](https://linkedin.com/in/sasan-moshirabadi)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
