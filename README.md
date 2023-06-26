@@ -136,7 +136,7 @@ You can deploy this project using:
 - Twitter: [@twitterhandle](https://twitter.com/Dammybest)
 - LinkedIn: [LinkedIn](https://www.linkedin.com/in/damilareismailabestbynature/)
 
-👤 **Sasan Moshirabadi**
+👤 **Author: Sasan Moshirabadi**
 
 - GitHub: [@dev89s](https://github.com/dev89s)
 - LinkedIn: [LinkedIn](https://linkedin.com/in/sasan-moshirabadi)
