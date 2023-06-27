@@ -8,4 +8,17 @@ class Teacher < Person
     @specialization = specialization
   end
 
-  
+  def to_json(*args)
+    {
+      type: 'teacher',
+      specialization: @specialization,
+      age: @age,
+      name: @name,
+      id: @id
+    }.to_json(*args)
+  end
+
+  def can_use_services?
+    true
+  end
+end
