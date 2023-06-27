@@ -16,6 +16,16 @@ class Student < Person
     classroom.students << self unless classroom.students.include?(self)
   end
 
+  def to_json(*args)
+    {
+      type: 'student',
+      id: @id,
+      age: @age,
+      name: @name,
+      parent_permission: @parent_permission
+    }.to_json(*args)
+  end
+
   def play_hookey
     '¯\(ツ)/¯'
   end

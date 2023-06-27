@@ -3,15 +3,14 @@ require_relative 'person'
 require_relative 'rental'
 require_relative 'student'
 require_relative 'teacher'
+require_relative 'file_operations'
+require 'json'
 
 class App
   def initialize
-    @books = []
-    @people = []
-    @rentals = []
+    load_data_from_file
   end
 
-  # list all books with their title and author as well as index. give a message if no book is found
   def list_all_books
     if @books.empty?
       puts 'No book found'
@@ -24,9 +23,6 @@ class App
     end
   end
 
-  # list all people and show whether they are student or
-  # teacher with their respective index as well as name, age
-  # and id, if they are student but add specialization if they are teachers
   def list_all_people
     puts '----------------------------------------------'
     puts '-------List of people are as follows:---------'
@@ -49,7 +45,6 @@ class App
     end
   end
 
-  # prompt user for person details based on the type
   def create_a_person
     name = retrieve_name
     age = retrieve_age
@@ -71,6 +66,7 @@ class App
     puts '-------------------------------------'
     puts 'Person added successfully'
     puts '-------------------------------------'
+    save_data_to_file
   end
 
   def retrieve_name
@@ -98,7 +94,6 @@ class App
     gets.chomp
   end
 
-  # prompt user for book details
   def create_a_book
     title = retrieve_title
     author = retrieve_author
@@ -107,6 +102,7 @@ class App
     puts '-------------------------------------'
     puts 'Book added successfully'
     puts '-------------------------------------'
+    save_data_to_file
   end
 
   def retrieve_title
@@ -119,7 +115,6 @@ class App
     gets.chomp
   end
 
-  # prompt user to select a person and a book from the list and create a rental
   def create_a_rental
     book = select_book
     person = select_person
@@ -131,6 +126,7 @@ class App
     puts '-------------------------------------'
     puts 'Rental created successfully'
     puts '-------------------------------------'
+    save_data_to_file
   end
 
   def select_book
@@ -152,17 +148,16 @@ class App
     gets.chomp
   end
 
-  # list all rentals with their date, book title and person name and index
   def list_all_rentals
     puts '----------------------------------------------'
     puts '---------list of rentals are as follows:---------'
     @rentals.each_with_index do |rental, index|
-      puts "#{index}) - Borrowed Date: #{rental.date}, Book borrowed: #{rental.book.title},
-      Borrower: #{rental.person.name} Designation: #{rental.person.class}"
+      if rental
+      puts "#{index}) - Borrowed Date: #{rental.date}, Book borrowed: #{rental.book.title}, Borrower: #{rental.person.name} Designation: #{rental.person.class}"
+      end
     end
   end
 
-  # list all rentals for a given person.id not the index of the array
   def list_all_rentals_for_a_given_person_id
     person_id = retrieve_person_id
     person = find_person_by_id(person_id)
