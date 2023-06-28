@@ -1,3 +1,5 @@
+require_relative 'basedecorator'
+
 class TrimmerDecorator < BaseDecorator
   MAX_LENGTH = 10
 
