@@ -27,6 +27,7 @@ def main
       app.send(OPTIONS[option].downcase.gsub(/\s+/, '_'))
     when 8
       # display a message and exit the application
+      app.save_all_data
       puts 'Thank you for using this app. Goodbye!'
       break
     else

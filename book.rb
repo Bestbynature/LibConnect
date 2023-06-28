@@ -8,12 +8,12 @@ class Book
     @rentals = []
   end
 
-  def to_json(options = {})
-    {
-      title: @title,
-      author: @author
-    }.to_json(options)
-  end
+  # def to_json(options = {})
+  #   {
+  #     title: @title,
+  #     author: @author
+  #   }.to_json(options)
+  # end
 
   # add a rental to the book's list of rentals
   def add_rental(rental)

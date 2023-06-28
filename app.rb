@@ -3,46 +3,19 @@ require_relative 'person'
 require_relative 'rental'
 require_relative 'student'
 require_relative 'teacher'
-require_relative 'file_operations'
+require_relative 'file_loader'
+require_relative 'file_saver'
 require 'json'
 
 class App
+  attr_accessor :books, :persons, :rentals
+
   def initialize
-    load_data_from_file
-  end
-
-  def list_all_books
-    if @books.empty?
-      puts 'No book found'
-    else
-      puts '----------------------------------------------'
-      puts '---------list of books are as follows:---------'
-      @books.each_with_index do |book, index|
-        puts "#{index}) - Title: #{book.title}, Author: #{book.author}"
-      end
-    end
-  end
-
-  def list_all_people
-    puts '----------------------------------------------'
-    puts '-------List of people are as follows:---------'
-    @people.each_with_index do |person, index|
-      if person.is_a? Student
-        name = person.name
-        age = person.age
-        id = person.id
-        par_perm = person.parent_permission
-        grp = person.class
-        puts "[#{grp}] - #{index}) - Name: #{name}, Age: #{age}, ID: #{id}, Parent Permission: #{par_perm}"
-      elsif person.is_a? Teacher
-        grp = person.class
-        name = person.name
-        age = person.age
-        id = person.id
-        spec = person.specialization
-        puts "[#{grp}] - #{index}) - Name: #{name}, Age: #{age}, ID: #{id}, Specialization: #{spec}"
-      end
-    end
+    @file_loader = FileLoader.new
+    @books = @file_loader.load_books
+    @people = @file_loader.load_people
+    @rentals = @file_loader.load_rentals(@books, @people)
+    @file_saver = FileSaver.new(@books, @people, @rentals)
   end
 
   def create_a_person
@@ -66,7 +39,6 @@ class App
     puts '-------------------------------------'
     puts 'Person added successfully'
     puts '-------------------------------------'
-    save_data_to_file
   end
 
   def retrieve_name
@@ -102,7 +74,6 @@ class App
     puts '-------------------------------------'
     puts 'Book added successfully'
     puts '-------------------------------------'
-    save_data_to_file
   end
 
   def retrieve_title
@@ -116,72 +87,43 @@ class App
   end
 
   def create_a_rental
-    book = select_book
-    person = select_person
-    date = retrieve_date
-
+    puts 'Select a book from the following list by number'
+    @file_saver.list_all_books
+    book_id = gets.chomp.to_i
+    book = @books[book_id]
+    puts 'Select a person from the following list by number'
+    @file_saver.list_all_people
+    person_id = gets.chomp.to_i
+    person = @people[person_id]
+    puts 'Date: in this format => yyyy/mm/dd'
+    date = gets.chomp
     rental = Rental.new(date, book, person)
     @rentals.push(rental)
-
     puts '-------------------------------------'
     puts 'Rental created successfully'
     puts '-------------------------------------'
-    save_data_to_file
   end
 
-  def select_book
-    puts 'Select a book from the following list by number'
-    list_all_books
-    book_id = gets.chomp.to_i
-    @books[book_id]
+  def list_all_books
+    @file_saver.list_all_books
   end
 
-  def select_person
-    puts 'Select a person from the following list by number'
-    list_all_people
-    person_id = gets.chomp.to_i
-    @people[person_id]
-  end
-
-  def retrieve_date
-    puts 'Date: in this format => yyyy/mm/dd'
-    gets.chomp
+  def list_all_people
+    @file_saver.list_all_people
   end
 
   def list_all_rentals
-    puts '----------------------------------------------'
-    puts '---------list of rentals are as follows:---------'
-    @rentals.each_with_index do |rental, index|
-      if rental
-      puts "#{index}) - Borrowed Date: #{rental.date}, Book borrowed: #{rental.book.title}, Borrower: #{rental.person.name} Designation: #{rental.person.class}"
-      end
-    end
+    @file_saver.list_all_rentals
   end
 
   def list_all_rentals_for_a_given_person_id
-    person_id = retrieve_person_id
-    person = find_person_by_id(person_id)
-
-    if person
-      puts '---------list of rentals are as follows:---------'
-      display_rentals(person.rentals)
-    else
-      puts 'Person not found'
-    end
+    @file_saver.list_all_rentals_for_a_given_person_id
   end
 
-  def retrieve_person_id
-    puts 'Please enter the ID of the person'
-    gets.chomp.to_i
-  end
-
-  def find_person_by_id(person_id)
-    @people.find { |person| person.id == person_id }
-  end
-
-  def display_rentals(rentals)
-    rentals.each_with_index do |rental, index|
-      puts "#{index}) - Borrowed Date: #{rental.date}, Book borrowed: #{rental.book.title}"
-    end
+  def save_all_data
+    # file_saver = FileSaver.new(@books, @people, @rentals)
+    @file_saver.save_books if @books.length.positive?
+    @file_saver.save_people if @people.length.positive?
+    @file_saver.save_rentals if @rentals.length.positive?
   end
 end

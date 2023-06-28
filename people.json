@@ -1,4 +1,4 @@
 [
-  "{\"type\":\"student\",\"id\":94,\"age\":12,\"name\":\"omole\",\"parent_permission\":true}",
-  "{\"type\":\"teacher\",\"specialization\":\"Courier\",\"age\":23,\"name\":\"Agba\",\"id\":257}"
+{"name":"firt persom","age":12,"id":764,"parent_permission":true},
+{"name":"secoper","age":24,"id":99,"parent_permission":true}
 ]
