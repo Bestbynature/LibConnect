@@ -1,6 +1,6 @@
 require 'rspec'
-require '../student.rb'
-require '../classroom.rb'
+require '../student'
+require '../classroom'
 
 describe Student do
   let(:classroom) { Classroom.new('Physics') }

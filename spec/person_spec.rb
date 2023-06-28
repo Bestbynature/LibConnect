@@ -1,6 +1,6 @@
 require 'rspec'
-require '../person.rb'
-require '../book.rb'
+require '../person'
+require '../book'
 
 describe Person do
   let(:age) { 20 }
@@ -38,7 +38,6 @@ describe Person do
         expect(person.can_use_services?).to be true
       end
     end
-
   end
 
   describe '#add_rental' do

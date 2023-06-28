@@ -1,5 +1,5 @@
 require 'rspec'
-require '../book.rb'
+require '../book'
 
 describe Book do
   let(:title) { 'The Great Gatsby' }
@@ -21,9 +21,9 @@ describe Book do
 
   describe '#add_rental' do
     it 'adds a rental to the rentals array' do
-      expect {
+      expect do
         book.add_rental(rental)
-      }.to change { book.rentals.length }.by(1)
+      end.to change { book.rentals.length }.by(1)
       expect(book.rentals).to include(rental)
     end
   end

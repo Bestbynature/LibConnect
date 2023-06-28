@@ -1,4 +1,4 @@
-equire 'rspec'
+require 'rspec'
 require_relative '../teacher'
 
 describe Teacher do
