@@ -19,6 +19,10 @@ RSpec.describe Solver do
     it 'reverses a word' do
       expect(Solver.reverse('hello')).to eq('olleh')
     end
+
+    it 'reverses the word madam' do
+      expect(Solver.reverse('madam')).to eq('madam')
+    end
   end
 
   describe '#fizzbuzz' do
@@ -36,6 +40,10 @@ RSpec.describe Solver do
 
     it 'returns N as a string for any other case' do
       expect(Solver.fizzbuzz(7)).to eq('7')
+    end
+
+    it 'returns buzz for 25' do
+      expect(Solver.fizzbuzz(25)).to eq('buzz')
     end
   end
 end
