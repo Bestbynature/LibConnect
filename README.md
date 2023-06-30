@@ -1,3 +1,6 @@
+<!-- Insert an image from the current directory -->
+![UML Class Diagram](./uml_class_diagram.png)
+
 <a name="readme-top"></a>
 
 <!-- TABLE OF CONTENTS -->
